@@ -35,10 +35,10 @@ param_env_vars:
   - { env_var: "EXTERNALURL", env_value: "yourdomain.url", desc: "The external url you would like to use to access Pydio Cells (Can be https://domain.url or http://IP:PORT)." }
 param_usage_include_vols: true
 param_volumes:
-  - { vol_path: "/config", vol_host_path: "</path/to/appdata/config>", desc: "All the config files reside here." }
+  - { vol_path: "/config", vol_host_path: "/path/to/appdata", desc: "All the config files reside here." }
 param_usage_include_ports: true
 param_ports:
-  - { external_port: "8080", internal_port: "8080", port_desc: "Http port" }
+  - { external_port: "8080", internal_port: "8080", port_desc: "Https port" }
 param_device_map: false
 param_devices:
   - { device_path: "/dev/dri", device_host_path: "/dev/dri", desc: "For hardware transcoding" }
@@ -69,10 +69,13 @@ optional_block_1_items: ""
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  You must first create a mysql database for Pydio Cells. Using our [mariadb image](https://hub.docker.com/r/linuxserver/mariadb) is recommended.  
+  You must first create a mysql database for Pydio Cells. Using our [mariadb image](https://hub.docker.com/r/linuxserver/mariadb) is recommended.
+
+  Open the webpage at `https://SERVERIP:8080` and complete the wizard steps.
 
 
 # changelog
 changelogs:
+  - { date: "16.03.20:", desc: "Switch gui to https so as not to break Cells Sync." }
   - { date: "19.12.19:", desc: "Rebasing to alpine 3.11." }
   - { date: "12.12.19:", desc: "Initial Release" }

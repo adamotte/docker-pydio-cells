@@ -68,7 +68,7 @@ docker create \
   -e TZ=Europe/London \
   -e EXTERNALURL=yourdomain.url \
   -p 8080:8080 \
-  -v </path/to/appdata/config>:/config \
+  -v /path/to/appdata:/config \
   --restart unless-stopped \
   linuxserver/pydio-cells
 ```
@@ -92,7 +92,7 @@ services:
       - TZ=Europe/London
       - EXTERNALURL=yourdomain.url
     volumes:
-      - </path/to/appdata/config>:/config
+      - /path/to/appdata:/config
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -105,7 +105,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | Parameter | Function |
 | :----: | --- |
 | `--hostname=pydio-cells` | Pydio Cells uses the hostname to verify local files. This setting is required and should not be changed after it has been set. |
-| `-p 8080` | Http port |
+| `-p 8080` | Https port |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
@@ -141,7 +141,9 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 &nbsp;
 ## Application Setup
 
-You must first create a mysql database for Pydio Cells. Using our [mariadb image](https://hub.docker.com/r/linuxserver/mariadb) is recommended.  
+You must first create a mysql database for Pydio Cells. Using our [mariadb image](https://hub.docker.com/r/linuxserver/mariadb) is recommended.
+
+Open the webpage at `https://SERVERIP:8080` and complete the wizard steps.
 
 
 
@@ -209,5 +211,6 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **16.03.20:** - Switch gui to https so as not to break Cells Sync.
 * **19.12.19:** - Rebasing to alpine 3.11.
 * **12.12.19:** - Initial Release
